@@ -1,0 +1,19 @@
+{
+  "name": "@freight-trust/compliance",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/freight-trust/compliance.git"
+  },
+  "author": "SEE LICENSE",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/freight-trust/compliance/issues"
+  },
+  "homepage": "https://github.com/freight-trust/compliance#readme"
+}
