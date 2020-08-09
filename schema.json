@@ -1,0 +1,638 @@
+ {
+    "/ping": {
+    "get": {
+    "responses": {
+    "200": {
+}
+}
+}
+}
+, "/ofac/companies/ {
+    companyID;
+}
+": {
+    "get": {
+    "responses": {
+    "200": {
+    "description": "OFAC Company and metadata", "properties": {
+    "ID": {
+    "description": "OFAC Company ID", "type":"string"}
+, "sdn": {
+    "description": "Specially designated national from OFAC list", "properties": {
+    "entityID": {
+    "type": "string"}
+, "sdnName": {
+    "type": "string"}
+, "sdnType": {
+    "description": "SDN's typically represent an individual (customer) or trust/company/organization. OFAC endpoints refer to customers or companies as different entities, but underlying both is the same SDN metadata.", "type":"string"}
+, "programs": {
+    "type": "array", "description":"Programs is the sanction programs this SDN was added from", "items": {
+    "type": "string"}
+}
+, "title": {
+    "type": "string"}
+, "remarks": {
+    "type": "string"}
+, "match": {
+    "type": "number", "description":"Remarks on SDN and often additional information about the SDN"}
+}
+}
+, "addresses": {
+    "type": "array", "items": {
+    "description": "Physical address from OFAC list", "properties": {
+    "entityID": {
+    "type": "string"}
+, "addressID": {
+    "type": "string"}
+, "address": {
+    "type": "string"}
+, "cityStateProvincePostalCode": {
+    "type": "string"}
+, "country": {
+    "type": "string"}
+, "match": {
+    "type": "number"}
+}
+}
+}
+, "alts": {
+    "type": "array", "items": {
+    "description": "Alternate name from OFAC list", "properties": {
+    "entityID": {
+    "type": "string"}
+, "alternateID": {
+    "type": "string"}
+, "alternateType": {
+    "type": "string"}
+, "alternateName": {
+    "type": "string"}
+, "alternateRemarks": {
+    "type": "string"}
+, "match": {
+    "type": "number"}
+}
+}
+}
+, "status": {
+    "description": "Status properties of an OFAC Company", "properties": {
+    "userID": {
+    "description": "User ID provided when updating status", "type":"string"}
+, "note": {
+    "description": "Optional note from updating status", "type":"string"}
+, "status": {
+    "description": "Manually applied status for OFAC Company", "type":"string", "enum":["unsafe", "exception"];
+}
+, "createdAt": {
+    "type": "string", "format":"date-time"}
+}
+}
+}
+, "$schema":"http://json-schema.org/draft-04/schema#"}
+}
+	}, 
+	"put": {
+    "body": {
+    "description": "Request body to update a company status.", "properties": {
+    "status": {
+    "description": "manual override of company/SDN sanction status", "type":"string", "enum":["unsafe", "exception"];
+}
+, "notes": {
+    "description": "Free form notes about manually changing the Company status", "type":"string"}
+}
+, "required":["status"], "$schema":"http://json-schema.org/draft-04/schema#"}
+, "responses": {
+    "200": {
+}
+}
+}
+}
+, "/ofac/companies/ {
+    companyID;
+}
+/watch": {
+    "post": {
+    "body": {
+    "description": "Webhook or other means of notification on search criteria. OFAC will make a POST request with a body of the customer or company (SDN, AltNames, and Address).", "properties": {
+    "authToken": {
+    "description": "Private token supplied by clients to be used for authenticating webhooks.", "type":"string"}
+, "webhook": {
+    "description": "HTTPS url for webhook on search match", "type":"string"}
+}
+, "required":["authToken", "webhook"], "$schema":"http://json-schema.org/draft-04/schema#"}
+, "responses": {
+    "200": {
+    "description": "Customer or Company watch", "properties": {
+    "watchID": {
+    "description": "Object representing a customer or company watch", "type":"string"}
+}
+, "$schema":"http://json-schema.org/draft-04/schema#"}
+, "404": {
+}
+}
+}
+}
+, "/ofac/companies/ {
+    companyID;
+}
+/watch/ {
+    watchID;
+}
+": {
+    "delete": {
+    "responses": {
+    "200": {
+}
+}
+}
+}
+, "/ofac/companies/watch": {
+    "post": {
+    "body": {
+    "description": "Webhook or other means of notification on search criteria. OFAC will make a POST request with a body of the customer or company (SDN, AltNames, and Address).", "properties": {
+    "authToken": {
+    "description": "Private token supplied by clients to be used for authenticating webhooks.", "type":"string"}
+, "webhook": {
+    "description": "HTTPS url for webhook on search match", "type":"string"}
+}
+, "required":["authToken", "webhook"], "$schema":"http://json-schema.org/draft-04/schema#"}
+, "responses": {
+    "200": {
+    "description": "Customer or Company watch", "properties": {
+    "watchID": {
+    "description": "Object representing a customer or company watch", "type":"string"}
+}
+, "$schema":"http://json-schema.org/draft-04/schema#"}
+}
+}
+}
+, "/ofac/companies/watch/ {
+    watchID;
+}
+": {
+    "delete": {
+    "responses": {
+    "200": {
+}
+}
+}
+}
+, "/ofac/customers/ {
+    customerID;
+}
+": {
+    "get": {
+    "responses": {
+    "200": {
+    "description": "OFAC Customer and metadata", "properties": {
+    "ID": {
+    "description": "OFAC Customer ID", "type":"string"}
+, "sdn": {
+    "description": "Specially designated national from OFAC list", "properties": {
+    "entityID": {
+    "type": "string"}
+, "sdnName": {
+    "type": "string"}
+, "sdnType": {
+    "description": "SDN's typically represent an individual (customer) or trust/company/organization. OFAC endpoints refer to customers or companies as different entities, but underlying both is the same SDN metadata.", "type":"string"}
+, "programs": {
+    "type": "array", "description":"Programs is the sanction programs this SDN was added from", "items": {
+    "type": "string"}
+}
+, "title": {
+    "type": "string"}
+, "remarks": {
+    "type": "string"}
+, "match": {
+    "type": "number", "description":"Remarks on SDN and often additional information about the SDN"}
+}
+}
+, "addresses": {
+    "type": "array", "items": {
+    "description": "Physical address from OFAC list", "properties": {
+    "entityID": {
+    "type": "string"}
+, "addressID": {
+    "type": "string"}
+, "address": {
+    "type": "string"}
+, "cityStateProvincePostalCode": {
+    "type": "string"}
+, "country": {
+    "type": "string"}
+, "match": {
+    "type": "number"}
+}
+}
+}
+, "alts": {
+    "type": "array", "items": {
+    "description": "Alternate name from OFAC list", "properties": {
+    "entityID": {
+    "type": "string"}
+, "alternateID": {
+    "type": "string"}
+, "alternateType": {
+    "type": "string"}
+, "alternateName": {
+    "type": "string"}
+, "alternateRemarks": {
+    "type": "string"}
+, "match": {
+    "type": "number"}
+}
+}
+}
+, "status": {
+    "description": "Status properties of an OFAC Customer", "properties": {
+    "userID": {
+    "description": "User ID provided when updating status", "type":"string"}
+, "note": {
+    "description": "Optional note from updating status", "type":"string"}
+, "status": {
+    "description": "Manually applied status for OFAC Customer", "type":"string", "enum":["unsafe", "exception"];
+}
+, "createdAt": {
+    "type": "string", "format":"date-time"}
+}
+}
+}
+, "$schema":"http://json-schema.org/draft-04/schema#"}
+}
+}
+, "put": {
+    "body": {
+    "description": "Request body to update a customers status.", "properties": {
+    "status": {
+    "description": "manual override of customer/SDN sanction status", "type":"string", "enum":["unsafe", "exception"];
+}
+, "notes": {
+    "description": "Free form notes about manually changing the Customer status", "type":"string"}
+}
+, "required":["status"], "$schema":"http://json-schema.org/draft-04/schema#"}
+, "responses": {
+    "200": {
+}
+}
+}
+}
+, "/ofac/customers/ {
+    customerID;
+}
+/watch": {
+    "post": {
+    "body": {
+    "description": "Webhook or other means of notification on search criteria. OFAC will make a POST request with a body of the customer or company (SDN, AltNames, and Address).", "properties": {
+    "authToken": {
+    "description": "Private token supplied by clients to be used for authenticating webhooks.", "type":"string"}
+, "webhook": {
+    "description": "HTTPS url for webhook on search match", "type":"string"}
+}
+, "required":["authToken", "webhook"], "$schema":"http://json-schema.org/draft-04/schema#"}
+, "responses": {
+    "200": {
+    "description": "Customer or Company watch", "properties": {
+    "watchID": {
+    "description": "Object representing a customer or company watch", "type":"string"}
+}
+, "$schema":"http://json-schema.org/draft-04/schema#"}
+, "404": {
+}
+}
+}
+}
+, "/ofac/customers/ {
+    customerID;
+}
+/watch/ {
+    watchID;
+}
+": {
+    "delete": {
+    "responses": {
+    "200": {
+}
+}
+}
+}
+, "/ofac/customers/watch": {
+    "post": {
+    "body": {
+    "description": "Webhook or other means of notification on search criteria. OFAC will make a POST request with a body of the customer or company (SDN, AltNames, and Address).", "properties": {
+    "authToken": {
+    "description": "Private token supplied by clients to be used for authenticating webhooks.", "type":"string"}
+, "webhook": {
+    "description": "HTTPS url for webhook on search match", "type":"string"}
+}
+, "required":["authToken", "webhook"], "$schema":"http://json-schema.org/draft-04/schema#"}
+, "responses": {
+    "200": {
+    "description": "Customer or Company watch", "properties": {
+    "watchID": {
+    "description": "Object representing a customer or company watch", "type":"string"}
+}
+, "$schema":"http://json-schema.org/draft-04/schema#"}
+}
+}
+}
+, "/ofac/customers/watch/ {
+    watchID;
+}
+": {
+    "delete": {
+    "responses": {
+    "200": {
+}
+}
+}
+}
+, "/ofac/sdn/ {
+    sdnID;
+}
+": {
+    "get": {
+    "responses": {
+    "200": {
+    "description": "Specially designated national from OFAC list", "properties": {
+    "entityID": {
+    "type": "string"}
+, "sdnName": {
+    "type": "string"}
+, "sdnType": {
+    "description": "SDN's typically represent an individual (customer) or trust/company/organization. OFAC endpoints refer to customers or companies as different entities, but underlying both is the same SDN metadata.", "type":"string"}
+, "programs": {
+    "type": "array", "description":"Programs is the sanction programs this SDN was added from", "items": {
+    "type": "string"}
+}
+, "title": {
+    "type": "string"}
+, "remarks": {
+    "type": "string"}
+, "match": {
+    "type": "number", "description":"Remarks on SDN and often additional information about the SDN"}
+}
+, "$schema":"http://json-schema.org/draft-04/schema#"}
+}
+}
+}
+, "/ofac/sdn/ {
+    sdnID;
+}
+/alts": {
+    "get": {
+    "responses": {
+    "200": {
+    "type": "array", "items": {
+    "description": "Alternate name from OFAC list", "properties": {
+    "entityID": {
+    "type": "string"}
+, "alternateID": {
+    "type": "string"}
+, "alternateType": {
+    "type": "string"}
+, "alternateName": {
+    "type": "string"}
+, "alternateRemarks": {
+    "type": "string"}
+, "match": {
+    "type": "number"}
+}
+}
+, "$schema":"http://json-schema.org/draft-04/schema#"}
+}
+}
+}
+, "/ofac/sdn/ {
+    sdnID;
+}
+/addresses": {
+    "get": {
+    "responses": {
+    "200": {
+    "type": "array", "items": {
+    "description": "Physical address from OFAC list", "properties": {
+    "entityID": {
+    "type": "string"}
+, "addressID": {
+    "type": "string"}
+, "address": {
+    "type": "string"}
+, "cityStateProvincePostalCode": {
+    "type": "string"}
+, "country": {
+    "type": "string"}
+, "match": {
+    "type": "number"}
+}
+}
+, "$schema":"http://json-schema.org/draft-04/schema#"}
+}
+}
+}
+, "/search": {
+    "get": {
+    "responses": {
+    "200": {
+    "description": "Search results containing SDNs, alternate names and/or addreses", "properties": {
+    "SDNs": {
+    "type": "array", "items": {
+    "description": "Specially designated national from OFAC list", "properties": {
+    "entityID": {
+    "type": "string"}
+, "sdnName": {
+    "type": "string"}
+, "sdnType": {
+    "description": "SDN's typically represent an individual (customer) or trust/company/organization. OFAC endpoints refer to customers or companies as different entities, but underlying both is the same SDN metadata.", "type":"string"}
+, "programs": {
+    "type": "array", "description":"Programs is the sanction programs this SDN was added from", "items": {
+    "type": "string"}
+}
+, "title": {
+    "type": "string"}
+, "remarks": {
+    "type": "string"}
+, "match": {
+    "type": "number", "description":"Remarks on SDN and often additional information about the SDN"}
+}
+}
+}
+, "altNames": {
+    "type": "array", "items": {
+    "description": "Alternate name from OFAC list", "properties": {
+    "entityID": {
+    "type": "string"}
+, "alternateID": {
+    "type": "string"}
+, "alternateType": {
+    "type": "string"}
+, "alternateName": {
+    "type": "string"}
+, "alternateRemarks": {
+    "type": "string"}
+, "match": {
+    "type": "number"}
+}
+}
+}
+, "addresses": {
+    "type": "array", "items": {
+    "description": "Physical address from OFAC list", "properties": {
+    "entityID": {
+    "type": "string"}
+, "addressID": {
+    "type": "string"}
+, "address": {
+    "type": "string"}
+, "cityStateProvincePostalCode": {
+    "type": "string"}
+, "country": {
+    "type": "string"}
+, "match": {
+    "type": "number"}
+}
+}
+}
+, "sectoralSanctions": {
+    "type": "array", "items": {
+    "description": "Treasury Department Sectoral Sanctions Identifications List (SSI)", "properties": {
+    "entityID": {
+    "type": "string", "description":"The ID assigned to an entity by the Treasury Department"}
+, "type": {
+    "type": "string", "description":"Entity type (e.g. individual, vessel, aircraft, etc)"}
+, "programs": {
+    "type": "array", "description":"Sanction programs for which the entity is flagged", "items": {
+    "type": "string"}
+}
+, "name": {
+    "type": "string", "description":"The name of the entity"}
+, "addresses": {
+    "type": "array", "description":"Addresses associated with the entity", "items": {
+    "type": "string"}
+}
+, "remarks": {
+    "type": "array", "description":"Additional details regarding the entity", "items": {
+    "type": "string"}
+}
+, "alternateNames": {
+    "type": "array", "description":"Known aliases associated with the entity", "items": {
+    "type": "string"}
+}
+, "ids": {
+    "type": "array", "description":"IDs on file for the entity", "items": {
+    "type": "string"}
+}
+, "sourceListURL": {
+    "type": "string", "description":"The link to the official SSI list"}
+, "sourceInfoURL": {
+    "type": "string", "description":"The link for information regarding the source"}
+}
+}
+}
+, "deniedPersons": {
+    "type": "array", "items": {
+    "description": "BIS Denied Persons List item", "properties": {
+    "name": {
+    "type": "string", "description":"Name of the Denied Person"}
+, "streetAddress": {
+    "type": "string", "description":"Denied Person's street address"}
+, "city": {
+    "type": "string", "description":"Denied Person's city"}
+, "state": {
+    "type": "string", "description":"Denied Person's state"}
+, "country": {
+    "type": "string", "description":"Denied Person's country"}
+, "postalCode": {
+    "type": "string", "description":"Denied Person's postal code"}
+, "effectiveDate": {
+    "type": "string", "description":"Date when denial came into effect"}
+, "expirationDate": {
+    "type": "string", "description":"Date when denial expires, if blank denial never expires"}
+, "standardOrder": {
+    "type": "string", "description":"Denotes whether or not the Denied Person was added by a standard order"}
+, "lastUpdate": {
+    "type": "string", "description":"Most recent date when the Denied Person record was updated"}
+, "action": {
+    "type": "string", "description":"Most recent action taken regarding the denial"}
+, "frCitation": {
+    "type": "string", "description":"Reference to the order's citation in the Federal Register"}
+, "match": {
+    "type": "number"}
+}
+}
+}
+, "bisEntities": {
+    "type": "array", "items": {
+    "description": "Bureau of Industry and Security Entity List", "properties": {
+    "name": {
+    "type": "string", "description":"The name of the entity"}
+, "addresses": {
+    "type": "array", "description":"Addresses associated with the entity", "items": {
+    "type": "string"}
+}
+, "alternateNames": {
+    "type": "array", "description":"Known aliases associated with the entity", "items": {
+    "type": "string"}
+}
+, "startDate": {
+    "type": "string", "description":"Date when the restriction came into effect"}
+, "licenseRequirement": {
+    "type": "string", "description":"Specifies the license requirement imposed on the named entity"}
+, "licensePolicy": {
+    "type": "string", "description":"Identifies the policy BIS uses to review the licenseRequirements"}
+, "frNotice": {
+    "type": "string", "description":"Identifies the corresponding Notice in the Federal Register"}
+, "sourceListURL": {
+    "type": "string", "description":"The link to the official SSI list"}
+, "sourceInfoURL": {
+    "type": "string", "description":"The link for information regarding the source"}
+}
+}
+}
+, "refreshedAt": {
+    "type": "string", "format":"date-time"}
+}
+, "$schema":"http://json-schema.org/draft-04/schema#"}
+}
+}
+}
+, "/downloads": {
+    "get": {
+    "responses": {
+    "200": {
+    "type": "array", "items": {
+    "description": "Metadata and stats about downloaded OFAC data", "properties": {
+    "SDNs": {
+    "type": "integer"}
+, "altNames": {
+    "type": "integer"}
+, "addresses": {
+    "type": "integer"}
+, "sectoralSanctions": {
+    "type": "integer"}
+, "deniedPersons": {
+    "type": "integer"}
+, "bisEntities": {
+    "type": "integer"}
+, "timestamp": {
+    "type": "string", "format":"date-time"}
+}
+}
+, "$schema":"http://json-schema.org/draft-04/schema#"}
+}
+}
+}
+, "/ui/values/ {
+    key;
+}
+": {
+    "get": {
+    "responses": {
+    "200": {
+    "type": "array", "items": {
+    "type": "string"}
+, "$schema":"http://json-schema.org/draft-04/schema#"}
+, "400": {
+    "$ref": "", "$schema":"http://json-schema.org/draft-04/schema#"}
+}
+}
+}
+}
